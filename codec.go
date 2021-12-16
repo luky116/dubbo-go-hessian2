@@ -350,13 +350,13 @@ func SetValue(dest, v reflect.Value) {
 	kind := dest.Kind()
 	switch kind {
 	case reflect.Float32, reflect.Float64:
-		dest.SetFloat(EnsureFloat64(v.Interface()))
+		dest.SetFloat(v.Float())
 		return
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		dest.SetInt(EnsureInt64(v.Interface()))
+		dest.SetInt(v.Int())
 		return
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		dest.SetUint(EnsureUint64(v.Interface()))
+		dest.SetUint(v.Uint())
 		return
 	}
 
@@ -468,11 +468,11 @@ func ConvertSliceValueType(destTyp reflect.Type, v reflect.Value) (reflect.Value
 
 		switch {
 		case elemFloatType:
-			sl.Index(i).SetFloat(EnsureFloat64(itemValue.Interface()))
+			sl.Index(i).SetFloat(itemValue.Float())
 		case elemIntType:
-			sl.Index(i).SetInt(EnsureInt64(itemValue.Interface()))
+			sl.Index(i).SetInt(itemValue.Int())
 		case elemUintType:
-			sl.Index(i).SetUint(EnsureUint64(itemValue.Interface()))
+			sl.Index(i).SetUint(itemValue.Uint())
 		default:
 			SetValue(sl.Index(i), itemValue)
 		}
